@@ -1,3 +1,23 @@
+describe('Check footnotes', () => {
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    return false
+  })
+  it('should have footnotes California Edition', () => {
+    cy.visit('https://www.vergemotorcycles.com/order/fi_en/california-edition-details/')
+    cy.contains('Allow all').click({ timeout: 60000 })
+
+    cy.contains(' Non-refundable for order cancellations, except when statutory cancellation rights apply.')
+    cy.contains(' If you choose to apply for 3rd party consumer financing, additional related financing fees may apply.')
+  })
+
+  it('should have footnotes Your Verge', () => {
+    cy.visit('https://www.vergemotorcycles.com/order/fi_en/your-verge')
+    cy.contains('Allow all').click({ timeout: 60000 })
+
+    cy.contains(' Non-refundable for order cancellations, except when statutory cancellation rights apply.')
+    cy.contains(' If you choose to apply for 3rd party consumer financing, additional related financing fees may apply.')
+  })
+})
 
 describe('Configurator', () => {
   const url = 'https://www.vergemotorcycles.com/order/fi_en/'
