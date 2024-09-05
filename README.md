@@ -6,10 +6,15 @@
 npm install
 ```
 
-# Run Cypress test
+# Run Cypress test from terminal
+```sh
+npx cypress run --browser chrome
+```
+
+# Run Cypress test from UI
 
 ## 1. Open Cypress UI
-```shell
+```sh
 npx cypress open
 ```
 
