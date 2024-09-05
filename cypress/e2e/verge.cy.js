@@ -29,42 +29,41 @@ describe('Configurator', () => {
   beforeEach(() => {
     cy.visit(url);
 
-    cy.contains('Allow all').click({ timeout: 60000 })
-    cy.contains('Configure TS PRO').click({ timeout: 60000, force: true })
+    cy.contains('Allow all').click({ timeout: 60000, waitForAnimations: true })
+    cy.contains('Configure TS PRO').click({ timeout: 60000, force: true, waitForAnimations: true })
 
-    cy.get('#black > img.color-image', { timeout: 60000, force: true })
+    cy.get('#black > img.color-image', { timeout: 60000, force: true, waitForAnimations: true })
       .should('be.visible')
-      .click({ force: true })
+      .click({ force: true, waitForAnimations: true })
 
     cy.contains('Configure seat').click({ timeout: 60000, force: true })
     cy.get('#perforated-seat > div.configurator-option-details > div.configurator-option-name', { timeout: 60000, force: true })
       .should('be.visible')
-      .click({ force: true })
+      .click({ force: true, waitForAnimations: true })
 
-    cy.contains('Configure suspension').click({ force: true })
+    cy.contains('Configure suspension').click({ force: true, waitForAnimations: true })
 
-    cy.get('#overview', { timeout: 60000 })
-      .should('be.visible')
-      .click({ force: true })
+    cy.contains('Continue', { timeout: 60000 })
+      .click({ force: true, waitForAnimations: true })
 
-    cy.get('#overview-block > div.configurator-bottom > div.configurator-section-buttons > a', { timeout: 60000 })
-      .should('be.visible')
-      .click({ force: true })
+    cy.contains('Checkout', { timeout: 60000 })
+      .click({ force: true, waitForAnimations: true })
   })
 
   it('can fill form', () => {
-    cy.get('#fname').type('Jon')
-    cy.get('#lname').type('White')
-    cy.get('#pnumber').type('+358 0123456')
+    cy.contains('First name').type('Jon{enter}', { waitForAnimations: true, delay: 150 })
+    cy.contains('Last name').type('Doe{enter}'), { waitForAnimations: true, delay: 150 }
+    cy.contains('Address').type('Foobar 7 E{enter}', { waitForAnimations: true, delay: 150 })
 
-    cy.get('#saddress').type('Foobar 7 E')
-    cy.get('#email').type('example@example.com')
-    cy.get('#cemail').type('example@example.com')
+    cy.contains('City').type('Helsinki{enter}', { waitForAnimations: true, delay: 150 })
+    cy.contains('Additional info').type('851{enter}', { waitForAnimations: true, delay: 150 })
+    cy.contains('Zip code').type('001234{enter}', { waitForAnimations: true, delay: 150 })
 
-    cy.get('#ainfo').type('851')
-    cy.get('#zipcode').type('001234')
-    cy.get('#state').type('Uusimaa')
-    cy.get('#city').type('Helsinki')
+    cy.contains('Email *').type('example@example.com{enter}', { waitForAnimations: true, delay: 150 })
+    cy.contains('Phone number').type('+358 0123456{enter}', { waitForAnimations: true, delay: 150 })
 
+    cy.contains('Review & Pay')
+      .should('be.visible')
+      .click()
   })
 });
